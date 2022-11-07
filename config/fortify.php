@@ -46,7 +46,7 @@ return [
     |
     */
 
-    'username' => 'email',
+    'username' => env('AUTH_USERNAME', 'email'),
 
     'email' => 'email',
 
@@ -74,9 +74,9 @@ return [
     |
     */
 
-    'prefix' => '',
+    'prefix' => env('AUTH_PREFIX', ''),
 
-    'domain' => null,
+    'domain' => env('AUTH_DOMAIN', null),
 
     /*
     |--------------------------------------------------------------------------
