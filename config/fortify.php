@@ -46,7 +46,7 @@ return [
     |
     */
 
-    'username' => env('AUTH_USERNAME', 'email'),
+    'username' => env('AUTH_USERNAME', 'username'),
 
     'email' => 'email',
 
