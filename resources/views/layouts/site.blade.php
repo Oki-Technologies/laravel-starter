@@ -424,8 +424,9 @@
     @stack('modals')
 
     <!-- Scripts -->
-    @stack('js')
     @livewireScripts
+
+    @stack('js')
 </body>
 
 </html>
