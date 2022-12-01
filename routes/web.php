@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BusinessController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,4 +26,8 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::resource('business', BusinessController::class)->except(['show'])->names('office.business');
+    // Tenant Dashboard
+    Route::get('{business}', [BusinessController::class, 'show'])->name('office.business.show');
 });
