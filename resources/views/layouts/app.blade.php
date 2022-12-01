@@ -14,6 +14,23 @@
     <!-- Scripts -->
     @vite(['resources/js/app.js'])
 
+    @env('production')
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    @endenv @env('local')
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="http://cdn.test/font-awesome/6.1.2/css/all.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="http://cdn.test/bootstrap/5.0.2/css/bootstrap.min.css">
+    @endenv
+
     <!-- Styles -->
     @livewireStyles
 
@@ -47,6 +64,14 @@
 
     <!-- Scripts -->
     @livewireScripts
+
+    <!-- Bootstrap -->
+    <script src="http://cdn.test/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Font-awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/js/all.min.js"
+        integrity="sha512-rpLlll167T5LJHwp0waJCh3ZRf7pO6IT1+LZOhAyP6phAirwchClbTZV3iqL3BMrVxIYRbzGTpli4rfxsCK6Vw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     @stack('js')
 </body>
