@@ -1,7 +1,8 @@
-<x-tenant-layout>
+<x-tenant.app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ $business->name }}
+            {{-- {{ dd(request()->tenant) }} --}}
+            {{-- {{ $business->name }} --}}
         </h2>
     </x-slot>
 
@@ -10,4 +11,4 @@
             ...rooms, visitors, residents, apartments,...
         </div>
     </div>
-</x-tenant-layout>
+</x-tenant.app-layout>
