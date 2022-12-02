@@ -26,6 +26,10 @@ class NoTenantIdentified
      */
     public function handle(NothingIdentified $event)
     {
-        // abort(404);
+        $host = parse_url(env('APP_URL'), PHP_URL_HOST);
+        list($subdomain) = explode($host, request()->getHttpHost(), 2);
+
+        if ($subdomain and !$event->tenant)
+            abort(404);
     }
 }
