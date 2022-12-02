@@ -42,7 +42,7 @@ class Business extends Model implements
      * @var string[]
      */
     protected $fillable = [
-        'name', 'slug', 'hostname', 'path'
+        'name', 'slug', 'domain', 'path'
     ];
 
     /**
@@ -78,7 +78,7 @@ class Business extends Model implements
     public function getHostnames(): array
     {
         return [
-            $this->hostname
+            $this->domain
         ];
     }
 
@@ -90,17 +90,9 @@ class Business extends Model implements
      */
     public function tenantIdentificationByHttp(Request $request): ?Tenant
     {
-        $tenant = $this->query()
-            ->where('hostname', $request->getHttpHost())
-            ->where('path', $request->path())
-            ->first();
+        $tenant = $this->query()->where('domain', $request->getHttpHost())->first();
 
         return $tenant;
-
-        // list($subdomain) = explode('.', $request->getHost(), 2);
-        // return $this->query()
-        //     ->where('subdomain', $subdomain)
-        //     ->first();
     }
 
     public function tenantIdentificationByQueue(Processing $event): ?Tenant
