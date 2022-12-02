@@ -27,6 +27,7 @@ class ConfigureTenantConfig
     public function handle(ConfigureConfig $event)
     {
         if ($tenant = $event->event->tenant) {
+            // $event->set('app.url', route('tenant.dashboard'));
             $event->set('app.asset_url', env('APP_URL'));
         }
     }
