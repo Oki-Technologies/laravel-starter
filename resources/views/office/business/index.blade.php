@@ -23,11 +23,11 @@
                     @forelse ($businesses ?? [] as $business)
                         <tr>
                             <td>
-                                <a href="{{ route('office.business.show', ['business' => $business->slug]) }}">
+                                <a href="http://{{ $business->domain }}">
                                     {{ $business->name }}
                                 </a>
                             </td>
-                            <td>{{ $business->hostname }}</td>
+                            <td>{{ $business->domain }}</td>
                         </tr>
                     @empty
                         <tr>
