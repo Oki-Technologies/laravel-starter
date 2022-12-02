@@ -17,11 +17,11 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('name')->index();
             $table->string('slug');
-            $table->string('domain')->index();
+            $table->string('hostname')->index();
             $table->string('path')->nullable();
             $table->timestamps();
 
-            $table->unique(['domain', 'path'], 'domain');
+            $table->unique(['hostname', 'path'], 'hostname');
         });
     }
 
