@@ -28,13 +28,13 @@ class TenantRoutes
      */
     public function handle(ConfigureRoutes $event)
     {
-        if ($event->event->tenant) {
+        if ($tenant = $event->event->tenant) {
             $event
                 ->flush()
                 ->fromFile(
                     [
                         'middleware'    => [config('jetstream.auth_session')],
-                        'domain'        => $event->event->tenant->domain
+                        'domain'        => $tenant->domain
                     ],
                     base_path('/routes/tenant.php')
                 );
