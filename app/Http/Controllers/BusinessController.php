@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Business;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class BusinessController extends Controller
 {
@@ -46,13 +45,13 @@ class BusinessController extends Controller
         $exists = Business::where('name', $request->name)->first();
         if (!$exists) {
             $request['url'] = parse_url(env('APP_URL'), PHP_URL_HOST);
-            // dd($request->url);
+
             $business = Business::create([
                 'name'      => $request->name,
-                'hostname'  => $request->url,
+                'domain'    => $request->url,
             ]);
 
-            $business->path = $business->slug;
+            $business->domain = $business->slug . '.' . $business->domain;
             $business->save();
         }
 
