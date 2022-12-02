@@ -27,8 +27,13 @@ class ConfigureTenantConfig
     public function handle(ConfigureConfig $event)
     {
         if ($tenant = $event->event->tenant) {
-            // $event->set('app.url', route('tenant.dashboard'));
+            $event->set('app.name', $tenant->name);
+            $event->set('app.url', $tenant->url);
             $event->set('app.asset_url', env('APP_URL'));
+            $event->set('session.domain', $tenant->domain);
+            $event->set('fortify.domain', $tenant->domain);
+
+            // dd(config('fortify.domain'));
         }
     }
 }
