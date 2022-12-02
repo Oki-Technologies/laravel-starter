@@ -48,10 +48,10 @@ class BusinessController extends Controller
 
             $business = Business::create([
                 'name'      => $request->name,
-                'domain'    => $request->url,
+                'hostname'  => $request->url,
             ]);
 
-            $business->domain = $business->slug . '.' . $business->domain;
+            $business->hostname = $business->slug . '.' . $business->hostname;
             $business->save();
         }
 
