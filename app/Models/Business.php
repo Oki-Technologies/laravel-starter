@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -42,8 +43,44 @@ class Business extends Model implements
      * @var string[]
      */
     protected $fillable = [
-        'name', 'slug', 'domain', 'path'
+        'name', 'slug', 'hostname', 'path'
     ];
+
+    /**
+     * Interact with the tenant's hostname scheme.
+     *
+     * @return  \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function scheme(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value, $attributes) => ($attributes['ssl'] ?? 0) ? 'https://' : 'http://',
+        );
+    }
+
+    /**
+     * Interact with the tenant's domain name.
+     *
+     * @return  \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function domain(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->hostname,
+        );
+    }
+
+    /**
+     * Interact with the tenant's url.
+     *
+     * @return  \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function url(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value, $attributes) => $this->scheme . $attributes['hostname'],
+        );
+    }
 
     /**
      * Return the sluggable configuration array for this model.
@@ -78,7 +115,7 @@ class Business extends Model implements
     public function getHostnames(): array
     {
         return [
-            $this->domain
+            $this->hostname
         ];
     }
 
@@ -90,7 +127,8 @@ class Business extends Model implements
      */
     public function tenantIdentificationByHttp(Request $request): ?Tenant
     {
-        $tenant = $this->query()->where('domain', $request->getHttpHost())->first();
+        $tenant = $this->query()->where('hostname', $request->getHttpHost())->first();
+        $request['tenant'] = $tenant;
 
         return $tenant;
     }
