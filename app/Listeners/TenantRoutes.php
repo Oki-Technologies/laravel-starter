@@ -6,6 +6,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Tenancy\Affects\Routes\Events\ConfigureRoutes;
 
+use Illuminate\Support\Facades\Route;
+
 class TenantRoutes
 {
     /**
@@ -28,9 +30,12 @@ class TenantRoutes
     {
         if ($event->event->tenant) {
             $event
-                // ->flush()
+                ->flush()
                 ->fromFile(
-                    ['middleware' => ['auth:sanctum', config('jetstream.auth_session'), 'verified']],
+                    [
+                        'middleware'    => [config('jetstream.auth_session')],
+                        'domain'        => $event->event->tenant->domain
+                    ],
                     base_path('/routes/tenant.php')
                 );
         }
