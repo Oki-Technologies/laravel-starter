@@ -29,8 +29,7 @@ class ConfigureApplicationUrl
     public function handle(ConfigureURL $event)
     {
         if ($tenant = $event->event->tenant) {
-            // $event->changeRoot($tenant->slug . '.test');
-            $event->changeRoot(url($tenant->path));
+            $event->changeRoot($tenant->domain);
         }
     }
 }
