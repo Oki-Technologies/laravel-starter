@@ -4,14 +4,14 @@ use App\Http\Controllers\BusinessController;
 use Illuminate\Support\Facades\Route;
 
 /*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
+    |--------------------------------------------------------------------------
+    | Web Routes
+    |--------------------------------------------------------------------------
+    |
+    | Here is where you can register web routes for your application. These
+    | routes are loaded by the RouteServiceProvider within a group which
+    | contains the "web" middleware group. Now create something great!
+    |
 */
 
 Route::get('/', function () {
@@ -29,5 +29,5 @@ Route::middleware([
 
     Route::resource('business', BusinessController::class)->except(['show'])->names('office.business');
     // Tenant Dashboard
-    Route::get('{business}', [BusinessController::class, 'show'])->name('office.business.show');
+    // Route::get('{business}.' . env('APP_DOMAIN'), [BusinessController::class, 'show'])->name('office.business.show');
 });
