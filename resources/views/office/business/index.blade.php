@@ -23,11 +23,11 @@
                     @forelse ($businesses ?? [] as $business)
                         <tr>
                             <td>
-                                <a href="http://{{ $business->domain }}">
+                                <a href="{{ $business->url }}" target="__blank">
                                     {{ $business->name }}
                                 </a>
                             </td>
-                            <td>{{ $business->domain }}</td>
+                            <td>{{ $business->url }}</td>
                         </tr>
                     @empty
                         <tr>
